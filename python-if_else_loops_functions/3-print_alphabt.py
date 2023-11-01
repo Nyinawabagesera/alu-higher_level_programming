@@ -1,5 +1,5 @@
 #!/usr/bin/python3
 for i in range(97, 122)
-  if chr(i) in (q or e):
+    if chr(i) in (q or e):
     continue
-    print("{}".format(chr(i), end=' '))
+     print("{}".format(chr(i), end=' '))
