@@ -2,6 +2,6 @@
 def divisible_by_2(my_list=[]):
     for item in divisible_by_2(my_list):
         if item % 2 == 0:
-            return True
+            print("{:d} is divisible by 2".format(item))
         else:
-            return False
+            print("{:d} is not divisible by 2".format(item))
