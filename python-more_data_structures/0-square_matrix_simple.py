@@ -2,4 +2,4 @@
 def square_matrix_simple(matrix=[]):
     if not matrix:
         print()
-    transpose(map(num*num, matrix))
+   y = list(map(num*num, matrix))
