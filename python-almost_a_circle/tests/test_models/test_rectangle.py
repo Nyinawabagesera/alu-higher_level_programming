@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Test Rectangle"""
+"""Test cases for Base"""
 
 import unittest
 from io import StringIO
@@ -11,7 +11,7 @@ from models.rectangle import Rectangle
 
 
 class TestRectangle(unittest.TestCase):
-    """Test class for rectangle"""
+    """Test class for Base"""
 
     def test_instance(self):
         """Doc"""
@@ -19,9 +19,9 @@ class TestRectangle(unittest.TestCase):
         r1 = Rectangle(1, 2)
         r2 = Rectangle(1, 2, 3)
         r3 = Rectangle(1, 2, 3, 4)
-        r4 = Rectangle(1, 2, 3, 4, 5)
+        r8 = Rectangle(1, 2, 3, 4, 5)
 
-        self.assertEqual(r4.id, 5)
+        self.assertEqual(r8.id, 5)
 
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             r11 = Rectangle(0, 2)
@@ -62,9 +62,9 @@ class TestRectangle(unittest.TestCase):
         """Doc"""
         Base._Base__nb_objects = 0
         r1 = Rectangle(4, 2)
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             print(r1)
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "[Rectangle] (1) 0/0 - 4/2\n")
 
     def test_display(self):
@@ -72,17 +72,17 @@ class TestRectangle(unittest.TestCase):
         r1 = Rectangle(4, 2)
         r2 = Rectangle(4, 2, 3)
         r3 = Rectangle(4, 2, 3, 2)
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             r1.display()
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "####\n####\n")
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             r2.display()
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "   ####\n   ####\n")
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             r3.display()
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "\n\n   ####\n   ####\n")
 
     def test_to_dictionary(self):
@@ -217,3 +217,4 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(type(from_file), list)
         self.assertEqual(from_file[0].width, 1)
         self.assertEqual(from_file[0].height, 2)
+

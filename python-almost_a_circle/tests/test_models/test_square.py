@@ -56,22 +56,22 @@ class TestSquare(unittest.TestCase):
         """Doc"""
         Base._Base__nb_objects = 0
         s1 = Square(2)
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             print(s1)
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "[Square] (1) 0/0 - 2\n")
 
     def test_display(self):
         """Doc"""
         s1 = Square(2)
         s2 = Square(2, 2, 3)
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             s1.display()
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "##\n##\n")
-        with patch("sys.stdout", new=StringIO()) as seriously:
+        with patch("sys.stdout", new=StringIO()) as fake_out:
             s2.display()
-            self.assertEqual(seriously.getvalue(),
+            self.assertEqual(fake_out.getvalue(),
                              "\n\n\n  ##\n  ##\n")
 
     def test_to_dictionary(self):
@@ -189,3 +189,4 @@ class TestSquare(unittest.TestCase):
         from_file = Square.load_from_file()
         self.assertEqual(type(from_file), list)
         self.assertEqual(from_file[0].size, 2)
+
