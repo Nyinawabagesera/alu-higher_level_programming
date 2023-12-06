@@ -1,54 +1,55 @@
 #!/usr/bin/python3
-"""
-Write the class Square that inherits from Rectangle
-"""
+"""Class Square that inherit from Rectangle"""
+
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ This class defines the blueprint for a Square object """
+    """"
+            Class Square inheriting Rectangle
+            Attr :
+                    id: number
+                    size: number
+                    x: number
+                    y: number
+        """
 
     def __init__(self, size, x=0, y=0, id=None):
-        """ This func initializes a Square object"""
         super().__init__(size, size, x, y, id)
-
-    def __str__(self):
-        """The string representation of a Square object"""
-        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
 
     @property
     def size(self):
-        """Returns the size [width / height] of the square"""
-        return self.width if self.width else self.height
+        """Size getter"""
+        return self.width
 
     @size.setter
     def size(self, value):
-        """Sets the size [width / height] of the square"""
+        """Size setter"""
         self.width = value
         self.height = value
 
+    def __str__(self):
+        """return [Square] (<id>) <x>/<y> - <size>"""
+        return "[Square] ({}) {}/{} - {}" \
+            .format(self.id, self.x, self.y, self.size)
+
     def update(self, *args, **kwargs):
-        """Updates the values of a Square object attributes"""
-        attributes = ['id', 'size', 'x', 'y']
-        if args:
-            for i, arg in enumerate(args):
-                if i == 0 and arg is None:
-                    self.__init__(self.size, self.x, self.y)
-                else:
-                    setattr(self, attributes[i], arg)
-        elif kwargs:
-            for key, value in kwargs.items():
-                if key == "id" and value is None:
-                    self.__init__(self.size, self.x, self.y)
-                else:
-                    if key in attributes:
-                        setattr(self, key, value)
+        """assigns attributes"""
+        if len(args) != 0:
+            try:
+                self.id = args[0]
+                self.size = args[1]
+                self.x = args[2]
+                self.y = args[3]
+            except IndexError:
+                pass
+        elif len(kwargs) != 0:
+            self.id = kwargs["id"] if "id" in kwargs else self.id
+            self.size = kwargs["size"] if "size" in kwargs \
+                else self.size
+            self.x = kwargs["x"] if "x" in kwargs else self.x
+            self.y = kwargs["y"] if "y" in kwargs else self.y
 
     def to_dictionary(self):
-        """Returns the dictionary representation of a Square object."""
-        return {
-            "id": self.id,
-            "size": self.width,
-            "x": self.x,
-            "y": self.y
-        }
+        """returns the dictionary representation of a Rectangle"""
+        return {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
