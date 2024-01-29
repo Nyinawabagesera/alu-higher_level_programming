@@ -1,14 +1,13 @@
 #!/usr/bin/node
-const args = process.argv;
-const conA = Number(args[2]);
-const conB = Number(args[3]);
-
-function add (a, b) {
-  console.log(a + b);
-}
-
-if (conA && conB) {
-  add(conA, conB);
+const size = parseInt(process.argv[2]);
+if (isNaN(size)) {
+  console.log('Missing size');
 } else {
-  console.log('NaN');
+  for (let i = 0; i < size; i++) {
+    let yves = '';
+    for (let z = 0; z < size; z++) {
+      yves += 'X';
+    }
+    console.log(yves);
+  }
 }
